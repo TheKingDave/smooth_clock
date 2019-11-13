@@ -22,7 +22,7 @@ class _ClockState extends State<Clock> {
   void initState() {
     super.initState();
     time = DateTime.now();
-    _timer = new Timer.periodic(const Duration(milliseconds: 1), setTime);
+    _timer = new Timer.periodic(const Duration(seconds: 1), setTime);
   }
 
   void setTime(Timer _) {
@@ -51,20 +51,35 @@ class ClockPainter extends CustomPainter {
   final Color bgColor;
 
   final List<ClockDisplay> clocks = [
-    ClockDisplay(
+    /*ClockDisplay(
       color: Colors.red,
       maxValue: 1000,
       getValue: (time) => time.millisecond,
-    ),
+    ),*/
     ClockDisplay(
-      color: Colors.green,
-      maxValue: 60,
+      color: Colors.red,
+      maxValue: 59,
       getValue: (time) => time.second,
     ),
     ClockDisplay(
-      color: Colors.blue,
-      maxValue: 60,
+      color: Colors.green,
+      maxValue: 59,
       getValue: (time) => time.minute,
+    ),
+    ClockDisplay(
+      color: Colors.blue,
+      maxValue: 59,
+      getValue: (time) => time.hour,
+    ),
+    ClockDisplay(
+      color: Colors.yellow,
+      maxValue: 31,
+      getValue: (time) => time.day,
+    ),
+    ClockDisplay(
+      color: Colors.cyan,
+      maxValue: 12,
+      getValue: (time) => time.month,
     ),
   ];
 
@@ -73,34 +88,42 @@ class ClockPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     // Draw background
-    Paint background = Paint()..color = Colors.black;
+    Paint background = Paint()..color = bgColor;
     canvas.drawPaint(background);
 
     Offset center = size.center(Offset.zero);
 
+    double trackSize = ((size.width) / (clocks.length + 1));
 
+    for (var i = 0; i < clocks.length; i++) {
+      ClockDisplay cd = clocks[i];
+      double cdSize = trackSize * ((clocks.length - i));
 
-    double msSize = (size.width / 3) * 2;
-    paintArc(canvas, center, msSize, Color.fromARGB(255, 0, 255, 0),
-        calcRadius(time.millisecond, 1000));
-
-    double mSize = (size.width / 3);
-    paintArc(canvas, center, mSize, Color.fromARGB(255, 255, 0, 0),
-        calcRadius(time.second, 60));
+      paintArc(canvas, center, cdSize, trackSize/2, cd.color,
+          calcRadius(cd.getValue(time), cd.maxValue));
+    }
   }
 
   double calcRadius(int value, int maxValue) {
-    return ((value + 1) / maxValue) * 360;
+    return ((value) / maxValue) * 360;
   }
 
-  void paintArc(
-      Canvas canvas, Offset center, double size, Color color, double radius) {
+  void paintArc(Canvas canvas, Offset center, double size, double width,
+      Color color, double radius) {
+    final wHalf = width / 2;
+
     Paint fill = Paint()..color = color;
-    canvas.drawArc(Rect.fromCenter(center: center, width: size, height: size),
-        vm.radians(-90), vm.radians(radius), true, fill);
+    canvas.drawArc(
+        Rect.fromCenter(
+            center: center, width: size + wHalf, height: size + wHalf),
+        vm.radians(-90),
+        vm.radians(radius),
+        true,
+        fill);
 
     canvas.drawOval(
-        Rect.fromCenter(center: center, width: size - 20, height: size - 20),
+        Rect.fromCenter(
+            center: center, width: size - wHalf, height: size - wHalf),
         Paint()..color = this.bgColor);
   }
 
