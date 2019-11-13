@@ -1,4 +1,4 @@
-# smooth_clock
+# smoothclock
 
 A new Flutter project.
 

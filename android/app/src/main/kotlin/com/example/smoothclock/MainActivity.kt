@@ -1,4 +1,4 @@
-package com.example.smooth_clock
+package com.example.smoothclock
 
 import android.os.Bundle
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:smooth_clock/clock.dart';
-import 'package:smooth_clock/toSwatch.dart';
+import 'package:smoothclock/toSwatch.dart';
+
+import 'clock.dart';
 
 void main() => runApp(MyApp());
 
