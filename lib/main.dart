@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:smooth_clock/clock.dart';
+import 'package:smooth_clock/toSwatch.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,32 +11,29 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Smooth Clock',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: toSwatch(Colors.black),
       ),
-      home: MyHomePage(title: 'Smooth Clock'),
+      home: HomePage(
+        title: 'Smooth Clock',
+        child: Clock(),
+      ),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
+class HomePage extends StatelessWidget {
   final String title;
+  final Widget child;
 
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
+  HomePage({this.title, this.child, Key key}) : super(key: key);
 
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(this.title),
       ),
-      body: Center(
-
-      ),
+      body: child,
     );
   }
 }
