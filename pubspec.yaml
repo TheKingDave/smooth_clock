@@ -1,6 +1,6 @@
 name: smoothclock
 description: A simple clock
-version: 1.0.3+3
+version: 1.0.4+4
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
