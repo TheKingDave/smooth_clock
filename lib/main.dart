@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:smoothclock/toSwatch.dart';
+import 'package:flutter/services.dart';
 
 import 'clock.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  // Hide bottom navigation bar
+  SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
