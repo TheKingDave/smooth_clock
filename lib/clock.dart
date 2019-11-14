@@ -74,7 +74,7 @@ class ClockPainter extends CustomPainter {
     ),
     ClockDisplay(
       color: Colors.yellow,
-      maxValue: 31,
+      maxValue: daysInMont,
       getValue: (time) => time.day,
     ),
     ClockDisplay(
@@ -84,7 +84,7 @@ class ClockPainter extends CustomPainter {
     ),
   ];
 
-  ClockPainter(this.time, [this.bgColor = Colors.black]);
+  ClockPainter(this.time, [this.bgColor = Colors.white]);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -101,7 +101,7 @@ class ClockPainter extends CustomPainter {
       ClockDisplay cd = clocks[i];
       double cdSize = trackSize * ((clocks.length - i));
 
-      paintArc(canvas, center, cdSize, trackSize/2, cd.color,
+      paintArc(canvas, center, cdSize, trackSize / 2, cd.color,
           calcRadius(cd.getValue(time), cd.maxValue));
     }
   }
@@ -123,10 +123,14 @@ class ClockPainter extends CustomPainter {
         true,
         fill);
 
+    Paint reset = Paint()
+      ..color = Color(0x00000000)
+      ..blendMode = BlendMode.clear;
+
     canvas.drawOval(
         Rect.fromCenter(
             center: center, width: size - wHalf, height: size - wHalf),
-        Paint()..color = this.bgColor);
+        reset);
   }
 
   @override
