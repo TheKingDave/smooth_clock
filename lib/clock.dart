@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math.dart' as vm;
@@ -93,7 +94,8 @@ class ClockPainter extends CustomPainter {
 
     Offset center = size.center(Offset.zero);
 
-    double trackSize = ((size.width) / (clocks.length + 1));
+    double smallerSize = min(size.width, size.height);
+    double trackSize = ((smallerSize) / (clocks.length + 1));
 
     for (var i = 0; i < clocks.length; i++) {
       ClockDisplay cd = clocks[i];
