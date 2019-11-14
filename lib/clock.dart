@@ -68,7 +68,7 @@ class ClockPainter extends CustomPainter {
     ),
     ClockDisplay(
       color: Colors.blue,
-      maxValue: 59,
+      maxValue: 24,
       getValue: (time) => time.hour,
     ),
     ClockDisplay(
