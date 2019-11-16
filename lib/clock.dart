@@ -86,7 +86,7 @@ class ClockPainter extends CustomPainter {
     ),
   ];
 
-  ClockPainter(this.time, [this.bgColor = Colors.white]);
+  ClockPainter(this.time, [this.bgColor = Colors.black]);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -126,8 +126,7 @@ class ClockPainter extends CustomPainter {
         fill);
 
     Paint reset = Paint()
-      ..color = Color(0x00000000)
-      ..blendMode = BlendMode.clear;
+      ..color = bgColor;
 
     canvas.drawOval(
         Rect.fromCenter(
@@ -137,8 +136,7 @@ class ClockPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(ClockPainter oldDelegate) {
-    //return time.millisecond != oldDelegate.time.millisecond;
-    return true;
+    return time.millisecond != oldDelegate.time.millisecond;
   }
 }
 
