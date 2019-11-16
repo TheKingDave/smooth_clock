@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math.dart' as vm;
 
 import 'package:flutter/cupertino.dart';
+import 'package:date_util/date_util.dart';
 
 class Clock extends StatefulWidget {
   Clock({Key key}) : super(key: key);
@@ -74,7 +75,8 @@ class ClockPainter extends CustomPainter {
     ),
     ClockDisplay(
       color: Colors.yellow,
-      maxValue: daysInMont,
+      maxValue: (DateTime time) =>
+          DateUtil().daysInMonth(time.month, time.year),
       getValue: (time) => time.day,
     ),
     ClockDisplay(
@@ -102,7 +104,7 @@ class ClockPainter extends CustomPainter {
       double cdSize = trackSize * ((clocks.length - i));
 
       paintArc(canvas, center, cdSize, trackSize / 2, cd.color,
-          calcRadius(cd.getValue(time), cd.maxValue));
+          calcRadius(cd.getValue(time), cd.getMaxValue(time)));
     }
   }
 
@@ -142,8 +144,15 @@ class ClockPainter extends CustomPainter {
 
 class ClockDisplay {
   Color color;
-  int maxValue;
+  dynamic maxValue;
   int Function(DateTime time) getValue;
 
   ClockDisplay({this.color, this.maxValue, this.getValue});
+
+  int getMaxValue(DateTime time) {
+    if (maxValue is Function) {
+      return maxValue(time);
+    }
+    return maxValue;
+  }
 }
