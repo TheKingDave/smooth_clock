@@ -14,7 +14,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  final ClockVisualizationSettings vss = ClockVisualizationSettings(bgColor: Colors.black);
+  final ClockVisualizationSettings vss =
+      ClockVisualizationSettings(bgColor: Colors.black);
 
   // This widget is the root of your application.
   @override
@@ -52,7 +53,12 @@ class HomePage extends StatelessWidget {
         child: ListView(
           children: <Widget>[
             ListTile(
+              title: Text("Clock Styles", style: TextStyle(fontSize: 20)),
+            ),
+            Divider(),
+            ListTile(
               title: Text("Smooth Clock"),
+              selected: true,
             ),
             ListTile(
               title: Text("Binary Clock"),
