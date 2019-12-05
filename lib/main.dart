@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Smooth Clock',
       theme: ThemeData(
+        brightness: Brightness.dark,
         primarySwatch: toSwatch(Colors.black),
       ),
       home: HomePage(
