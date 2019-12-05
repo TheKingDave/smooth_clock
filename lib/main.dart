@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:smoothclock/toSwatch.dart';
 import 'package:flutter/services.dart';
+import 'package:smoothclock/visu/SmoothClock.dart';
+import 'package:smoothclock/visualization.dart';
 
 import 'clock.dart';
 
@@ -12,6 +14,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  final ClockVisualizationSettings vss = ClockVisualizationSettings(bgColor: Colors.black);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -22,7 +26,10 @@ class MyApp extends StatelessWidget {
       ),
       home: HomePage(
         title: 'Smooth Clock',
-        child: Clock(),
+        child: Clock(Visualization(
+            VisualizationSettings(
+                name: "Smooth", refreshTime: const Duration(milliseconds: 1)),
+            SmoothClock(vss))),
       ),
     );
   }
