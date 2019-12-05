@@ -47,6 +47,18 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(this.title),
       ),
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            ListTile(
+              title: Text("Smooth Clock"),
+            ),
+            ListTile(
+              title: Text("Binary Clock"),
+            ),
+          ],
+        ),
+      ),
       body: child,
     );
   }
