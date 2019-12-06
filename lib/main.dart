@@ -113,7 +113,10 @@ class HomePage extends StatelessWidget {
     children.addAll(clocks.map((name) => ListTile(
           title: Text(name),
           selected: this.selected == name,
-          onTap: () => onSelect(name),
+          onTap: () {
+            Navigator.pop(context);
+            onSelect(name);
+          },
         )));
 
     Size size = MediaQuery.of(context).size;
