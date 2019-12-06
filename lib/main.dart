@@ -53,6 +53,7 @@ class MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Smooth Clock',
       theme: ThemeData(
+        canvasColor: Colors.black54,
         brightness: Brightness.dark,
         primarySwatch: toSwatch(Colors.black),
       ),
@@ -63,13 +64,13 @@ class MyAppState extends State<MyApp> {
           selected: selected.settings.name,
           onSelect: (name) {
             Visualization newSelect;
-            for(var v in visualizations) {
-              if(v.settings.name == name) {
+            for (var v in visualizations) {
+              if (v.settings.name == name) {
                 newSelect = v;
                 break;
               }
             }
-            if(newSelect != null && newSelect != selected) {
+            if (newSelect != null && newSelect != selected) {
               setState(() {
                 selected = newSelect;
                 _key = UniqueKey();
@@ -99,10 +100,14 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> children = [
-      ListTile(
+      new Container(
+        decoration: new BoxDecoration(
+          color: Colors.black,
+        ),
+          child: ListTile(
         title: Text("Clock Styles", style: TextStyle(fontSize: 20)),
-      ),
-      Divider(),
+      )),
+      Divider(color: Colors.white38),
     ];
 
     children.addAll(clocks.map((name) => ListTile(
@@ -111,13 +116,19 @@ class HomePage extends StatelessWidget {
           onTap: () => onSelect(name),
         )));
 
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(this.title),
+        backgroundColor: Colors.black,
       ),
-      drawer: Drawer(
-        child: ListView(
-          children: children,
+      drawer: SizedBox(
+        width: size.width,
+        child: Drawer(
+          child: ListView(
+            children: children,
+          ),
         ),
       ),
       body: child,
