@@ -97,7 +97,7 @@ class _SmoothClockPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_SmoothClockPainter oldDelegate) {
-    return time.millisecond != oldDelegate.time.millisecond;
+    return time.second != oldDelegate.time.second;
   }
 }
 
